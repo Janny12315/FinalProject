@@ -9,11 +9,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UITest {
@@ -34,7 +35,6 @@ public class UITest {
         if(!new MainPage().isLogoAvailable()){
             new MainPage().closePopUpWindow();
         }
-        switchTo().defaultContent();
     }
 
 
@@ -121,22 +121,27 @@ public class UITest {
     @Order(6)
     @ParameterizedTest
     @CsvSource({"Киев, ОАЭ, 20, 8",
-            "Москва, Греция, 20, 28"})
+            "Москва, Греция, 19, 28"})
     @Tag("integration")
     public void testTourSelection(String cityOut, String countryIn, int dayBegin, int night) {
 
         TourSelector tourSelector = new TourSelector();
 
+        //LocalDate localDate=tourSelector.getSelectDate();
+        LocalDate localDate=LocalDate.now();
+
         tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectDateBegin(dayBegin).selectNight(night).clickSearchButton();
 
         switchTo().window(1);
 
+        ResultSearchPage resultSearchPage=new ResultSearchPage();
+        resultSearchPage.checkResultAvailable();
         //new ResultSearchPage().clarifyDateBegin(dayBegin).clarifyNight(night).clickSearchButton();
-        Assertions.assertAll(
-                () -> Assertions.assertTrue(new ResultSearchPage().checkResultCountries(countryIn)),
-                () -> Assertions.assertTrue(new ResultSearchPage().checkNightInResults(night)),
-                () -> Assertions.assertTrue(new ResultSearchPage().checkDateInResults(dayBegin)),
-                () -> Assertions.assertTrue(new ResultSearchPage().checkCityOutInResult(cityOut))
+        assertAll(
+                () -> assertTrue(resultSearchPage.checkСountryInResults(countryIn)),
+                () -> assertTrue(resultSearchPage.checkNightInResults(night)),
+                () -> assertTrue(resultSearchPage.checkDateInResults(localDate)),
+                () -> assertTrue(resultSearchPage.checkCityOutInResult(cityOut))
         );
 
 

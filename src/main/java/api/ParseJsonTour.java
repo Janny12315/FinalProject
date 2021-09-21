@@ -30,7 +30,7 @@ public class ParseJsonTour {
         Tour tour;
         while (iterator.hasNext()) {
             JSONArray jsonArray = (JSONArray) iterator.next();
-            LocalDate dateFirst = LocalDate.parse( (String) jsonArray.get(0) , formatter );;
+            LocalDate dateFirst = LocalDate.parse( (String) jsonArray.get(0) , formatter );
             JSONArray j1 = (JSONArray) jsonArray.get(5);
             String cityIn = (String) j1.get(0);
             JSONArray j2 = (JSONArray) jsonArray.get(16);

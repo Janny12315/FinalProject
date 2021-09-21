@@ -1,9 +1,14 @@
 package ui;
 
 import com.codeborne.selenide.*;
+import org.junit.Assert;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -12,7 +17,7 @@ public class ResultSearchPage {
     public static final ElementsCollection resultsCountries = $$x("//*[@class=\"city-name map-marker-ico show_map_link\"]");
     public static final ElementsCollection resultsNights = $$x("//*[@class=\"icon-spacer\"]/div[@class=\"type\"]");
     public static final ElementsCollection resultsDates = $$x("//*[@class=\"inline-visible icon-spacer fav-tourinfo\"]/div[@class=\"type\"]");
-//    public static final SelenideElement buttonSearch = $(".icon_set_1_icon-42");
+    //    public static final SelenideElement buttonSearch = $(".icon_set_1_icon-42");
 //    public static final SelenideElement clarifyDate = $x("//*[@data-type=\"period\"]");
 //    public static final SelenideElement openMobileForm = $("#open_form_mobile");
 //    public static final SelenideElement clarifyNight = $(".nights-text");
@@ -40,13 +45,19 @@ public class ResultSearchPage {
 //        return this;
 //    }
 
-    public boolean checkResultCountries(String country) {
-        Configuration.timeout = 50000;
+    public void checkResultAvailable() {
+        Configuration.timeout = 70000;
         resultsCountries.get(1).should(Condition.visible);
         Configuration.timeout = 4000;
-        long resultsWithRightCountries = resultsCountries.stream().filter(se -> se.getText().contains(country)).count();
-        resultsCountries.stream().forEach(System.out::println);
+    }
 
+    public boolean checkСountryInResults(String country) {
+        long resultsWithRightCountries = resultsCountries.stream().filter(se -> se.getText().contains(country)).count();
+        List<String> listWithCountries = resultsCountries.stream().map(se -> se.getText()).collect(Collectors.toList());
+        for (String s : listWithCountries) {
+            System.out.println(s);
+        }
+        resultsCountries.stream().forEach(se -> se.getText());
         return resultsWithRightCountries == resultsCountries.size();
     }
 
@@ -56,10 +67,26 @@ public class ResultSearchPage {
         return resultsWithRightNights == resultsNights.size();
     }
 
-    public boolean checkDateInResults(int dayBegin) {
+    public boolean checkDateInResults(LocalDate dayBegin) {
         long resultsWithRightDayBegin = resultsDates.stream().filter(se -> se.getText().contains(String.valueOf(dayBegin))).count();
-        resultsDates.stream().forEach(System.out::println);
-        return resultsWithRightDayBegin == resultsDates.size();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
+
+        List<LocalDate> list = resultsDates.stream().map(se -> LocalDate.parse(se.getText().substring(0, 10), formatter)).collect(Collectors.toList());
+
+        list.forEach(System.out::println);
+
+        boolean isDateRight=false;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).isAfter(dayBegin))
+                isDateRight=true;
+            else {
+                isDateRight=false;
+                break;
+            }
+        }
+
+        return isDateRight;
     }
 
     public boolean checkCityOutInResult(String cityOut) {
