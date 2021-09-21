@@ -62,9 +62,29 @@ public class ResultSearchPage {
     }
 
     public boolean checkNightInResults(int night) {
-        long resultsWithRightNights = resultsNights.stream().filter(se -> se.getText().contains(String.valueOf(night))).count();
-        resultsNights.stream().forEach(System.out::println);
-        return resultsWithRightNights == resultsNights.size();
+//        long resultsWithRightNights = resultsNights.stream().filter(se -> se.getText().contains(String.valueOf(night))).count();
+//        resultsNights.stream().forEach(System.out::println);
+//        System.out.println(resultsWithRightNights);
+//        System.out.println(resultsNights.size());
+//        return resultsWithRightNights == resultsNights.size();
+//        boolean isNightRight=false;
+
+
+        boolean isNightRight=false;
+        List<String> list = resultsNights.stream().map(se -> se.getText().split(" ")[1]).collect(Collectors.toList());
+        System.out.println(night);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+            if (Integer.parseInt(list.get(i))>=night)
+                isNightRight=true;
+            else {
+                isNightRight=false;
+                break;
+            }
+        }
+        return isNightRight;
+
     }
 
     public boolean checkDateInResults(LocalDate dayBegin) {
@@ -74,11 +94,14 @@ public class ResultSearchPage {
 
         List<LocalDate> list = resultsDates.stream().map(se -> LocalDate.parse(se.getText().substring(0, 10), formatter)).collect(Collectors.toList());
 
-        list.forEach(System.out::println);
+        //list.forEach(System.out::println);
 
         boolean isDateRight=false;
+        System.out.println(dayBegin);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).isAfter(dayBegin))
+            System.out.println(list.get(i));
+            if (list.get(i).isAfter(dayBegin)||list.get(i).equals(dayBegin))
                 isDateRight=true;
             else {
                 isDateRight=false;

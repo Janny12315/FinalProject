@@ -120,15 +120,15 @@ public class UITest {
 
     @Order(6)
     @ParameterizedTest
-    @CsvSource({"Киев, ОАЭ, 20, 8",
-            "Москва, Греция, 19, 28"})
+    @CsvSource({"Киев, ОАЭ,30, 8",
+            "Москва, Греция, 29, 28"})
     @Tag("integration")
     public void testTourSelection(String cityOut, String countryIn, int dayBegin, int night) {
 
         TourSelector tourSelector = new TourSelector();
 
         //LocalDate localDate=tourSelector.getSelectDate();
-        LocalDate localDate=LocalDate.now();
+        LocalDate localDate=LocalDate.of(2021,9, dayBegin);
 
         tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectDateBegin(dayBegin).selectNight(night).clickSearchButton();
 
@@ -137,12 +137,19 @@ public class UITest {
         ResultSearchPage resultSearchPage=new ResultSearchPage();
         resultSearchPage.checkResultAvailable();
         //new ResultSearchPage().clarifyDateBegin(dayBegin).clarifyNight(night).clickSearchButton();
-        assertAll(
-                () -> assertTrue(resultSearchPage.checkСountryInResults(countryIn)),
-                () -> assertTrue(resultSearchPage.checkNightInResults(night)),
-                () -> assertTrue(resultSearchPage.checkDateInResults(localDate)),
-                () -> assertTrue(resultSearchPage.checkCityOutInResult(cityOut))
-        );
+        try {
+            assertAll(
+                    () -> assertTrue(resultSearchPage.checkСountryInResults(countryIn)),
+                    () -> assertTrue(resultSearchPage.checkNightInResults(night)),
+                    () -> assertTrue(resultSearchPage.checkDateInResults(localDate)),
+                    () -> assertTrue(resultSearchPage.checkCityOutInResult(cityOut))
+            );
+        }catch (Exception e){
+            System.out.println("исключение");
+            Selenide.closeWindow();
+            switchTo().window(0);
+
+        }
 
 
         Selenide.closeWindow();
