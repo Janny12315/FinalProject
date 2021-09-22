@@ -73,6 +73,7 @@ public class ResultSearchPage {
     }
 
     public boolean checkCityOut(String cityOut) {
+        System.out.println("заявленный город: "+cityOut+ " сравниваем "+cityOutResult.getText());
         return cityOutResult.getText().equals(cityOut);
     }
 
