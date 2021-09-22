@@ -63,7 +63,7 @@ public class ResultSearchPage {
 
     public boolean checkCityOut(String cityOut) {
         System.out.println("заявленный город: "+cityOut+ " сравниваем "+cityOutResult.getText()+"!");
-        return cityOutResult.should(Condition.visible).getText().equals(cityOut);
+        return cityOutResult.getText().equals(cityOut);
     }
 
     public List<String> selectTour(int number) {

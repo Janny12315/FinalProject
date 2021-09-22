@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: ui.UITest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 141.095 s - in ui.UITest
+Tests run: 8, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 200.684 s <<< FAILURE! - in ui.UITest
+ui.UITest.testCountries(int)[1]  Time elapsed: 9.229 s  <<< FAILURE!
+com.codeborne.selenide.ex.ElementShould: 
+Element should visible {By.xpath: //*[@class="country-list-flag-item "][1]}
+Element: '<li class="country-list-flag-item " data-cid="1" type value="0" displayed:false></li>'
+Actual value: visible:false
+Screenshot: file:/D:/JavaProjects/FinalProject/build/reports/tests/1632296827350.0.png
+Page source: file:/D:/JavaProjects/FinalProject/build/reports/tests/1632296827350.0.html
+Timeout: 4 s.
+	at ui.UITest.testCountries(UITest.java:119)
+
