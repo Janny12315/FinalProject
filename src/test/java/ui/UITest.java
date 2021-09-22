@@ -9,9 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,8 +31,19 @@ public class UITest {
     @BeforeEach
     public void openSite() {
         open("https://www.tez-tour.com/");
-        if(!new MainPage().isLogoAvailable()){
+        if (!new MainPage().isLogoAvailable()) {
             new MainPage().closePopUpWindow();
+        }
+    }
+
+    @AfterEach
+    public void closeWindow() {
+
+        ArrayList<String> tabs = new ArrayList<String>(Selenide.webdriver().driver().getWebDriver().getWindowHandles());
+//        System.out.println("Количество вкладок: " + tabs.size());
+        if (tabs.size() > 1) {
+            Selenide.closeWindow();
+            switchTo().window(0);
         }
     }
 
@@ -65,10 +75,6 @@ public class UITest {
 
         Assertions.assertTrue(new CabinetPage().checkCabinet());
 
-        Selenide.closeWindow();
-
-        switchTo().window(0);
-
     }
 
     @Order(3)
@@ -84,9 +90,6 @@ public class UITest {
 
         Assertions.assertTrue(new LoginPage().isErrorAuthorization());
 
-        Selenide.closeWindow();
-
-        switchTo().window(0);
     }
 
     @Order(4)
@@ -120,41 +123,24 @@ public class UITest {
 
     @Order(6)
     @ParameterizedTest
-    @CsvSource({"Киев, ОАЭ,30, 8",
+    @CsvSource({"Киев, ОАЭ, 30, 8",
             "Москва, Греция, 29, 28"})
     @Tag("integration")
     public void testTourSelection(String cityOut, String countryIn, int dayBegin, int night) {
 
         TourSelector tourSelector = new TourSelector();
 
-        //LocalDate localDate=tourSelector.getSelectDate();
-        LocalDate localDate=LocalDate.of(2021,9, dayBegin);
-
         tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectDateBegin(dayBegin).selectNight(night).clickSearchButton();
 
         switchTo().window(1);
 
-        ResultSearchPage resultSearchPage=new ResultSearchPage();
+        ResultSearchPage resultSearchPage = new ResultSearchPage();
         resultSearchPage.checkResultAvailable();
-        //new ResultSearchPage().clarifyDateBegin(dayBegin).clarifyNight(night).clickSearchButton();
-        try {
-            assertAll(
-                    () -> assertTrue(resultSearchPage.checkСountryInResults(countryIn)),
-                    () -> assertTrue(resultSearchPage.checkNightInResults(night)),
-                    () -> assertTrue(resultSearchPage.checkDateInResults(localDate)),
-                    () -> assertTrue(resultSearchPage.checkCityOutInResult(cityOut))
-            );
-        }catch (Exception e){
-            System.out.println("исключение");
-            Selenide.closeWindow();
-            switchTo().window(0);
+        assertTrue(resultSearchPage.checkСountry(countryIn));
+        assertTrue(resultSearchPage.checkNight(night));
+        assertTrue(resultSearchPage.checkDate(dayBegin));
+        assertTrue(resultSearchPage.checkCityOut(cityOut));
 
-        }
-
-
-        Selenide.closeWindow();
-
-        switchTo().window(0);
     }
 
     @Order(7)
@@ -167,13 +153,13 @@ public class UITest {
 
         TourSelector tourSelector = new TourSelector();
 
-        tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectDateBegin(dayBegin).selectNight(night).clickSearchButton();
+        tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectNight(night).selectDateBegin(dayBegin).clickSearchButton();
 
         switchTo().window(1);
 
         ResultSearchPage resultSearchPage = new ResultSearchPage();
 
-        List<String> infoTour = resultSearchPage.selectTour(selectResult);
+        List<String> infoTour = resultSearchPage.checkResultAvailable().selectTour(selectResult);
 
         switchTo().window(2);
 
@@ -182,10 +168,6 @@ public class UITest {
         for (int i = 0; i < infoTour.size(); i++) {
             assertEquals(infoTour.get(i), resultTour.get(i));
         }
-
-        Selenide.closeWindow();
-
-        switchTo().window(0);
     }
 
 }

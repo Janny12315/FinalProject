@@ -18,11 +18,7 @@ public class LoginPage {
     }
 
     public LoginPage inputPass(String pass) {
-        while (!passInput.exists()){
-            System.out.println("работает костыль");
-            clickContinue();
-        }
-        passInput.setValue(pass);
+        passInput.should(Condition.visible).setValue(pass);
         return this;
     }
 
