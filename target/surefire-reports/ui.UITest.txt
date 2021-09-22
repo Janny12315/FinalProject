@@ -1,14 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ui.UITest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 168.922 s <<< FAILURE! - in ui.UITest
-ui.UITest.testBanner(String)[1]  Time elapsed: 9.421 s  <<< FAILURE!
-com.codeborne.selenide.ex.ElementShould: 
-Element should visible {By.xpath: //*[text()="Солнечная Турция"]}
-Element: '<b displayed:false></b>'
-Actual value: visible:false
-Screenshot: file:/D:/JavaProjects/FinalProject/build/reports/tests/1632297741146.0.png
-Page source: file:/D:/JavaProjects/FinalProject/build/reports/tests/1632297741146.0.html
-Timeout: 4 s.
-	at ui.UITest.testBanner(UITest.java:62)
-
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 134.175 s - in ui.UITest

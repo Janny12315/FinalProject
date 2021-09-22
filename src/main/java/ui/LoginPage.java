@@ -33,6 +33,7 @@ public class LoginPage {
     }
 
     public boolean isErrorAuthorization() {
+        enterButton.click();
         errorAuthorization.should(Condition.visible);
         return errorAuthorization.isDisplayed();
     }
