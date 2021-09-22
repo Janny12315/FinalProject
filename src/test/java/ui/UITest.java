@@ -136,7 +136,7 @@ public class UITest {
 
         ResultSearchPage resultSearchPage = new ResultSearchPage();
         resultSearchPage.checkResultAvailable();
-        assertTrue(resultSearchPage.checkСountry(countryIn));
+        assertTrue(resultSearchPage.checkCountries(countryIn));
         assertTrue(resultSearchPage.checkNight(night));
         assertTrue(resultSearchPage.checkDate(dayBegin));
         assertTrue(resultSearchPage.checkCityOut(cityOut));
