@@ -15,7 +15,6 @@ public class ResultSearchPage {
     private static final ElementsCollection resultsCountries = $$x("//*[@class=\"city-name map-marker-ico show_map_link\"]");
     private static final ElementsCollection resultsNights = $$x("//*[@class=\"icon-spacer\"]/div[@class=\"type\"]");
     private static final ElementsCollection resultsDates = $$x("//*[@class=\"inline-visible icon-spacer fav-tourinfo\"]/div[@class=\"type\"]");
-//    private static final SelenideElement currency = $x("//div[@class=\"styled_select\"]/a[@class=\"selectBox styled selectBox-dropdown\"]");
 
 
     public ResultSearchPage checkResultAvailable() {
@@ -27,15 +26,12 @@ public class ResultSearchPage {
 
     public boolean checkCountries (String country) {
         long resultsWithRightCountries = resultsCountries.stream().filter(se -> se.getText().contains(country)).count();
-        System.out.println("ожид " + resultsWithRightCountries + " реальн " + resultsCountries.size());
         return resultsWithRightCountries == resultsCountries.size();
     }
 
     public boolean checkNight(int night) {
         boolean isNightRight = false;
         List<String> list = resultsNights.stream().map(se -> se.getText().split(" ")[1]).collect(Collectors.toList());
-        System.out.println(night);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
         for (int i = 0; i < list.size(); i++) {
             if (Integer.parseInt(list.get(i)) >= night)
                 isNightRight = true;
@@ -44,7 +40,6 @@ public class ResultSearchPage {
                 break;
             }
         }
-        System.out.println("checkNight"+isNightRight);
         return isNightRight;
     }
 
@@ -63,12 +58,11 @@ public class ResultSearchPage {
                 break;
             }
         }
-        System.out.println("checkDate"+isDateRight);
         return isDateRight;
     }
 
     public boolean checkCityOut(String cityOut) {
-        System.out.println("заявленный город: "+cityOut+ " сравниваем "+cityOutResult.getText());
+        System.out.println("заявленный город: "+cityOut+ " сравниваем "+cityOutResult.getText()+"!");
         return cityOutResult.should(Condition.visible).getText().equals(cityOut);
     }
 
@@ -78,7 +72,6 @@ public class ResultSearchPage {
         list.add($x(String.format("(//div[@class=\"hover-hint-container top-hint-pos\"]/a)[%d]", number)).getText());
         list.add($x(String.format("(//*[@class=\"type\"])[%d]", number)).getText().substring(0, 10));
         $x(String.format("(//*[@class=\"t-btn-todetail price-button detail-link fav-detailurl\"])[%d]", number)).click();
-//        Selenide.sleep(100);
         return list;
     }
 }
