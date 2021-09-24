@@ -11,9 +11,13 @@ import static com.codeborne.selenide.Selenide.$x;
 public class IntermediateSelection {
     private static final SelenideElement selectCurrency = $x("//*[@class=\"styled_select\"]/a");
     private static final SelenideElement selectTypeOfFood = $x("//div[contains(text(),\"Питание\")]");
+    private static final SelenideElement selectPriceforCurrency = $x("//*[@class=\"menu_title\"]");
 
     public void changeCurrency(CurrencyTour currencyTour) {
         Selenide.sleep(2000);
+        if(!selectTypeOfFood.isDisplayed()){
+            selectPriceforCurrency.should(Condition.visible).click();
+        }
         selectCurrency.should(Condition.visible).click();
         $x(String.format("(//a[@%s])[3]", currencyTour.getAttr())).click();
     }
