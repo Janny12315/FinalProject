@@ -18,7 +18,7 @@ public class IntermediateSelection {
         if(selectPriceforCurrency.isDisplayed()){
             selectPriceforCurrency.click();
         }
-        selectCurrency.should(Condition.visible).click();
+        selectCurrency.click();
         $x(String.format("(//a[@%s])[3]", currencyTour.getAttr())).click();
     }
     public void changeTypeOfFood(String typeOfFood) {
