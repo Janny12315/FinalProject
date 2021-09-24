@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class PaymentPage {
     private static final SelenideElement closePopUpOK = $("#modal-close");
     private static final SelenideElement booking = $x("//*[text()=\"Бронирование\")]");
-    private static final SelenideElement timeBeforeCloseиBooking = $("#countdownBox");
+    private static final SelenideElement timeBeforeCloseBooking = $("#countdownBox");
     private static final SelenideElement priceWith = $(".lg-currency");
 
     public void closePopUpOK() {
@@ -20,7 +20,7 @@ public class PaymentPage {
 
     public boolean rightViewAndPrice(int priceWithoutTax,int tax) {
         booking.should(Condition.visible);
-        timeBeforeCloseиBooking.should(Condition.exist);
+        timeBeforeCloseBooking.should(Condition.exist);
         int priceWithTax= Integer.parseInt(priceWith.getText().split(" ")[0]);
         return priceWithTax==priceWithoutTax+tax;
     }

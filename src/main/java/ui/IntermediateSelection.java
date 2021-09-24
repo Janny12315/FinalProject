@@ -15,8 +15,8 @@ public class IntermediateSelection {
 
     public void changeCurrency(CurrencyTour currencyTour) {
         Selenide.sleep(2000);
-        if(!selectTypeOfFood.isDisplayed()){
-            selectPriceforCurrency.should(Condition.visible).click();
+        if(selectPriceforCurrency.isDisplayed()){
+            selectPriceforCurrency.click();
         }
         selectCurrency.should(Condition.visible).click();
         $x(String.format("(//a[@%s])[3]", currencyTour.getAttr())).click();

@@ -159,7 +159,6 @@ public class UITest {
         intermediateSelection.changeCurrency(CurrencyTour.USD);
         intermediateSelection.changeStar(5);
         intermediateSelection.changeTypeOfFood("Только завтраки");
-
         Selenide.sleep(30000);
 
 
