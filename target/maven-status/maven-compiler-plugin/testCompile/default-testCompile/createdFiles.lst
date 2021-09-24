@@ -1,2 +1,4 @@
 api\RunnerTest.class
+api\Steps\CheckResponseWithTourSteps.class
 ui\UITest.class
+api\Steps\CheckGeneralReferenceSteps.class

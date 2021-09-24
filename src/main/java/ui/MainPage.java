@@ -1,6 +1,7 @@
 package ui;
 
 import com.codeborne.selenide.*;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -15,7 +16,7 @@ public class MainPage {
     public static final SelenideElement getLocation = $x("//*[@class=\"dd-city\"]");
     public static final ElementsCollection countries = $$x("//*[@class=\"country-list-flag-item \"]");
 
-
+    @Step("Закрыть окошко с геолокацией")
     public void closePopUpWindow() {
         closePopUpWindow.should(Condition.visible).click();
     }
@@ -27,6 +28,7 @@ public class MainPage {
         return imgLogo.isDisplayed();
     }
 
+    @Step("Установить локацию Минск")
     public void setLocationMinsk() {
         Configuration.timeout = 20000;
         changeLocation.should(Condition.visible).click();

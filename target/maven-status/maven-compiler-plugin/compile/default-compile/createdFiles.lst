@@ -1,12 +1,12 @@
-api\StringRequest.class
 ui\LoginPage.class
 ui\CabinetPage.class
-ui\ItemMenuPage.class
 api\Tour.class
 api\ParseJsonTour.class
+ui\TourSelector.class
+api\StringRequest.class
+ui\ItemMenuPage.class
 ui\ResultSearchPage.class
 ui\MainPage.class
 ui\FinalTour.class
 api\HttpConnect.class
 ui\Banner.class
-ui\TourSelector.class

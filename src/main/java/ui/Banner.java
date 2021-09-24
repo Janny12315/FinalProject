@@ -19,13 +19,12 @@ public class Banner {
     public Banner(List list) {
         banner1 = $x(String.format("//*[text()=\"%s\"]", list.get(0)));
         banner2 = $x(String.format("//*[text()=\"%s\"]", list.get(1)));
-        banner3 = $x(String.format("//*[text()=\"%s\"]", list.get(2)));
-        banner4 = $x(String.format("//*[text()=\"%s\"]", list.get(3)));
-        banner5 = $x(String.format("//*[text()=\"%s\"]", list.get(4)));
+        //banner3 = $x(String.format("//*[text()=\"%s\"]", list.get(2)));
+        banner4 = $x(String.format("//*[text()=\"%s\"]", list.get(2)));
+        banner5 = $x(String.format("//*[text()=\"%s\"]", list.get(3)));
     }
 
 //    private static Logger logger=Logger.getLogger(Banner.class);
-    @Step("выбрать баннер по {0}")
     public String switchBanner(int numberBanner) {
 //        logger.debug("banner number "+numberBanner+" has been clicked");
         switch (numberBanner) {
@@ -35,13 +34,13 @@ public class Banner {
             case 2:
                 $x("//*[@href=\"10529\"]").click();
                 return banner2.should(Condition.visible).getText();
+//            case 3:
+//                $x("//*[@href=\"13149\"]").click();
+//                return banner3.should(Condition.visible).getText();
             case 3:
-                $x("//*[@href=\"13149\"]").click();
-                return banner3.should(Condition.visible).getText();
-            case 4:
                 $x("//*[@href=\"10773\"]").click();
                 return banner4.should(Condition.visible).getText();
-            case 5:
+            case 4:
                 $x("//*[@href=\"12789\"]").click();
                 return banner5.should(Condition.visible).getText();
             default:

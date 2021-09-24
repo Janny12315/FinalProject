@@ -5,6 +5,7 @@ import com.codeborne.selenide.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,6 +75,8 @@ public class ResultSearchPage {
         $x(String.format("(//*[@class=\"t-btn-todetail price-button detail-link fav-detailurl\"])[%d]", number)).click();
         return list;
     }
+
+
 }
 
 
