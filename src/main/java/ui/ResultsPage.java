@@ -37,9 +37,9 @@ public class ResultsPage {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
         List<LocalDate> list = datesInResults.stream().map(se -> LocalDate.parse(se.getText().substring(0, 10), formatter)).collect(Collectors.toList());
         System.out.println(selectedDay);
+        System.out.println(selectedDay);
         boolean isDateRight = false;
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
             if (list.get(i).isAfter(selectedDay))
                 isDateRight = true;
             else {
