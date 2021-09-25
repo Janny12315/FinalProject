@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ResultsPage {
-    private static final SelenideElement cityOutResult = $x("//*[@class=\"checked-place\"]");
+    private static final SelenideElement cityOutResult = $x("//*[@class=\"font_medium\"]");
     private static final String countriesInResults = "//*[@class=\"city-name map-marker-ico show_map_link\"]";
     private static final ElementsCollection nightsInResults = $$x("//*[@class=\"icon-spacer\"]/div[@class=\"type\"]");
     private static final ElementsCollection datesInResults = $$x("//*[@class=\"inline-visible icon-spacer fav-tourinfo\"]/div[@class=\"type\"]");

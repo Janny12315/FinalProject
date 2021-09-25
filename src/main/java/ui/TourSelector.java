@@ -17,6 +17,7 @@ public class TourSelector {
     public TourSelector selectCityOut(String city) {
         Select select = new Select(selectButtonCityOut);
         select.selectByVisibleText(city);
+        select.selectByVisibleText(city);
         while (!select.getFirstSelectedOption().getText().equals(city))
             select.selectByVisibleText(city);
         return this;
