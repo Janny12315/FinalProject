@@ -13,10 +13,13 @@ public class TourSelector {
     private static final SelenideElement selectButtonNight = $("#nightsMin");
     private static final SelenideElement selectButtonDate = $("#dateRange-from");
     private static final SelenideElement searchButton = $x("//*[@type=\"button\"]");
+    private static final SelenideElement backMonth = $x("//a[@class=\"ui-datepicker-prev ui-corner-all\"]");
 
     public TourSelector selectCityOut(String city) {
         Select select = new Select(selectButtonCityOut);
         select.selectByVisibleText(city);
+        if (!backMonth.isDisplayed())
+            select.selectByVisibleText(city);
         select.selectByVisibleText(city);
         while (!select.getFirstSelectedOption().getText().equals(city))
             select.selectByVisibleText(city);

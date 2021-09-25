@@ -129,8 +129,8 @@ public class UITest {
     @DisplayName("Подбор тура")
     @Order(6)
     @ParameterizedTest
-    @CsvSource({"Киев, ОАЭ, 30, 8",
-            "Москва, Греция, 29, 28"})
+    @CsvSource({"Киев, ОАЭ, 05, 8",
+            "Москва, Греция, 10, 28"})
     @Tag("integration")
     public void testTourSelection(String cityOut, String countryIn, int dayBegin, int night) {
 
