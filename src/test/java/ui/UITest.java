@@ -41,7 +41,6 @@ public class UITest {
     public void closeWindow() {
 
         ArrayList<String> tabs = new ArrayList<String>(Selenide.webdriver().driver().getWebDriver().getWindowHandles());
-//        System.out.println("Количество вкладок: " + tabs.size());
         if (tabs.size() > 1) {
             Selenide.closeWindow();
             switchTo().window(0);
@@ -120,6 +119,7 @@ public class UITest {
     @Order(5)
     @ParameterizedTest
     @CsvSource({"31"})
+    @Tag("smoke")
     public void testCountries(int count) {
         int countCountries = new MainPage().clickCountries().countCountries();
         assertEquals(count, countCountries);
@@ -139,7 +139,7 @@ public class UITest {
 
         switchTo().window(1);
 
-        ResultSearchPage resultSearchPage = new ResultSearchPage();
+        ResultsPage resultSearchPage = new ResultsPage();
         resultSearchPage.checkResultAvailable();
         assertTrue(resultSearchPage.checkCountries(countryIn));
         assertTrue(resultSearchPage.checkNight(night));
@@ -150,15 +150,24 @@ public class UITest {
 
     @DisplayName("Уточнение параметров тура")
     @Order(7)
-    @Test
+    @ParameterizedTest
+    @CsvSource("USD, 5, Только завтраки")
     @Tag("integration")
-    public void testIntermediateSelection() {
+    public void testIntermediateSelection(String currency, int stars, String pansion) {
+
         open("https://tourist.teztour.by/toursearch/8d51bf63c719684b7e11c4fa6cac2c84/tourType/1/cityId/786/before/19.10.2021/after/12.10.2021/countryId/7067673/minNights/11/maxNights/14/adults/2/flexdate/0/flexnight/0/hotelTypeId/357603/mealTypeId/2424/rAndBBetter/yes/isTableView/0/lview/cls/noTicketsTo/no/noTicketsFrom/no/hotelInStop/no/recommendedFlag/no/onlineConfirmFlag/no/tourMaxPrice/1500000/categoryGreatThan/yes/currencyId/533067/dtype/period/baggage/2.ru.html");
-        new ResultSearchPage().checkResultAvailable();
+        new ResultsPage().checkResultAvailable();
         IntermediateSelection intermediateSelection = new IntermediateSelection();
-        intermediateSelection.changeCurrency(CurrencyTour.USD);
-        intermediateSelection.changeStar(5);
-        intermediateSelection.changeTypeOfFood("Только завтраки");
+
+        intermediateSelection.changeCurrency(currency);
+        intermediateSelection.changeStar(stars);
+        intermediateSelection.changeTypeOfFood(pansion);
+        Selenide.sleep(1000);
+
+        ResultsPage resultSearchPage = new ResultsPage();
+        assertTrue(resultSearchPage.checkCurrency(Currency.USD));
+        assertTrue(resultSearchPage.checkStars(stars));
+        assertTrue(resultSearchPage.checkPansion(pansion));
 
     }
 
@@ -178,7 +187,7 @@ public class UITest {
 
         switchTo().window(1);
 
-        ResultSearchPage resultSearchPage = new ResultSearchPage();
+        ResultsPage resultSearchPage = new ResultsPage();
 
         resultSearchPage.checkResultAvailable();
         List<String> infoTour = resultSearchPage.selectTour(selectResult);
@@ -192,21 +201,6 @@ public class UITest {
         for (int i = 0; i < infoTour.size(); i++) {
             assertEquals(infoTour.get(i), resultTour.get(i));
         }
-
-
-//        finalTour.clickPayment();
-//        Selenide.sleep(30000);
-//
-//
-//        PaymentPage paymentPage = new PaymentPage();
-//
-//        paymentPage.closePopUpOK();
-
-//        int tax = 504;
-//        System.out.println(finalTour.priceWithoutTax());
-//        assertTrue(paymentPage.rightViewAndPrice(finalTour.priceWithoutTax(), tax));
-
     }
-
 
 }

@@ -11,18 +11,22 @@ import static com.codeborne.selenide.Selenide.$x;
 public class IntermediateSelection {
     private static final SelenideElement selectCurrency = $x("//*[@class=\"styled_select\"]/a");
     private static final SelenideElement selectTypeOfFood = $x("//div[contains(text(),\"Питание\")]");
+    private static final SelenideElement selectStars = $x("(//*[@class=\"menu_title \"])[2]");
     private static final SelenideElement selectPriceforCurrency = $x("//*[@class=\"menu_title\"]");
 
-    public void changeCurrency(CurrencyTour currencyTour) {
+    public void changeCurrency(String currency) {
         Selenide.sleep(2000);
-        if(selectPriceforCurrency.isDisplayed()){
+        if (selectPriceforCurrency.isDisplayed()) {
             selectPriceforCurrency.click();
         }
         selectCurrency.click();
-        $x(String.format("(//a[@%s])[3]", currencyTour.getAttr())).click();
+        $x(String.format("(//a[@%s])[3]", Currency.getCurrency(currency).getLink())).click();
     }
+
     public void changeTypeOfFood(String typeOfFood) {
-        selectTypeOfFood.should(Condition.visible).click();
+        if (selectTypeOfFood.isDisplayed()) {
+            selectTypeOfFood.click();
+        }
         switch (typeOfFood) {
             case "Любое":
                 $("#pansions-rate-9006284-").should(Condition.visible).click();
@@ -54,10 +58,13 @@ public class IntermediateSelection {
     }
 
     public IntermediateSelection() {
-        Configuration.timeout=10000;
+        Configuration.timeout = 20000;
     }
 
     public void changeStar(int star) {
+        if (selectStars.isDisplayed()) {
+            selectStars.click();
+        }
         switch (star) {
             case 2:
                 $x("//*[@value=\"-9006277-2\"]").should(Condition.visible).click();
@@ -78,18 +85,40 @@ public class IntermediateSelection {
 
     }
 }
-    enum CurrencyTour {
-        USD("rel=\"5561\""),
-        BYN("rel=\"533067\""),
-        RUB("rel=\"8390\""),
-        EUR("rel=\"18864\"");
-        private String attr;
 
-        CurrencyTour(String attr) {
-            this.attr = attr;
-        }
+enum Currency {
+    USD("rel=\"5561\"", "$"),
+    BYN("rel=\"533067\"", "BYN"),
+    RUB("rel=\"8390\"", "₽"),
+    EUR("rel=\"18864\"", "€");
+    private final String link;
+    private final String icon;
 
-        public String getAttr() {
-            return attr;
+    Currency(String link, String icon) {
+        this.link = link;
+        this.icon = icon;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public static Currency getCurrency(String currency) {
+        switch (currency) {
+            case "BYN":
+                return Currency.BYN;
+            case "USD":
+                return Currency.USD;
+            case "EUR":
+                return Currency.EUR;
+            case "RUB":
+                return Currency.RUB;
+            default:
+                return null;
         }
     }
+}

@@ -1,6 +1,7 @@
 D:\JavaProjects\FinalProject\src\main\java\ui\TourSelector.java
 D:\JavaProjects\FinalProject\src\main\java\api\StringRequest.java
 D:\JavaProjects\FinalProject\src\main\java\ui\MainPage.java
+D:\JavaProjects\FinalProject\src\main\java\ui\ResultsPage.java
 D:\JavaProjects\FinalProject\src\main\java\ui\FinalTour.java
 D:\JavaProjects\FinalProject\src\main\java\ui\ItemMenuPage.java
 D:\JavaProjects\FinalProject\src\main\java\api\HttpConnect.java
@@ -11,4 +12,3 @@ D:\JavaProjects\FinalProject\src\main\java\ui\LoginPage.java
 D:\JavaProjects\FinalProject\src\main\java\api\ParseJsonTour.java
 D:\JavaProjects\FinalProject\src\main\java\api\Tour.java
 D:\JavaProjects\FinalProject\src\main\java\ui\IntermediateSelection.java
-D:\JavaProjects\FinalProject\src\main\java\ui\ResultSearchPage.java

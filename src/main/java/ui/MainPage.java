@@ -20,7 +20,6 @@ public class MainPage {
     public void closePopUpWindow() {
         closePopUpWindow.should(Condition.visible).click();
     }
-
     public boolean isButtonAvailable() {
         return closePopUpWindow.exists();
     }
