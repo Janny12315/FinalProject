@@ -1,7 +1,6 @@
 package ui;
 
 import com.codeborne.selenide.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -50,7 +49,7 @@ public class ResultsPage {
     }
 
     public boolean checkCityOut(String cityOut) {
-        System.out.println("заявленный город: "+cityOut+ " сравниваем "+cityOutResult.getText()+"!");
+        String pngFileName = screenshot("my_file_name");
         return cityOutResult.getText().equals(cityOut);
     }
 

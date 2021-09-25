@@ -4,10 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.ui.Select;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
-
 import static com.codeborne.selenide.Selenide.*;
 
 public class TourSelector {
@@ -17,8 +13,6 @@ public class TourSelector {
     private static final SelenideElement selectButtonNight = $("#nightsMin");
     private static final SelenideElement selectButtonDate = $("#dateRange-from");
     private static final SelenideElement searchButton = $x("//*[@type=\"button\"]");
-    private static final SelenideElement selectedDay = $x("//*[@class=\"  ui-datepicker-current-day\"]/a");
-    private static final SelenideElement dayTo = $("#dateRange-to");
 
     public TourSelector selectCityOut(String city) {
         Select select = new Select(selectButtonCityOut);
@@ -57,13 +51,5 @@ public class TourSelector {
 
     public void clickSearchButton() {
         searchButton.should(Condition.enabled).click();
-    }
-
-    public LocalDate getSelectDate() {
-        selectButtonDate.should(Condition.visible).click();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
-        LocalDate localDateTo = LocalDate.parse(Objects.requireNonNull(dayTo.getAttribute("value")), formatter);
-        System.out.println(localDateTo);
-        return localDateTo.minusDays(7);
     }
 }

@@ -8,10 +8,12 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ItemMenuPage {
-    String name;
 
-    public ItemMenuPage(String name) {
-        this.name = name;
+    public ItemMenuPage() {
+    }
+
+    public SelenideElement itemMenu(String itemMenuName) {
+        return $x(String.format("//*[text()=\"%s\"]", itemMenuName));
     }
 
     public SelenideElement getH1(String name) {

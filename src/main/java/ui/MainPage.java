@@ -53,7 +53,4 @@ public class MainPage {
         personalArea.click();
     }
 
-    public SelenideElement itemMenu(String itemMenuName) {
-        return $x(String.format("//*[text()=\"%s\"]", itemMenuName));
-    }
 }

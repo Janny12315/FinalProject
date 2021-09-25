@@ -5,6 +5,7 @@ import api.ParseJsonTour;
 import api.Tour;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Tag;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -18,12 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CheckResponseWithTourSteps {
     static List<Tour> tours = new ArrayList<>();
 
+    @Tag("bdd")
     @When("get list with tours")
     public void getListWithTours() throws IOException {
         String response = HttpConnect.getToursWithParameters();
         tours = ParseJsonTour.parseTour(response);
     }
 
+    @Tag("bdd")
     @Then("Check all tours have right price {int}")
     public void checkAllToursHaveRightPrice(int priceMax) {
         for (Tour tour : tours) {
@@ -31,6 +34,7 @@ public class CheckResponseWithTourSteps {
         }
     }
 
+    @Tag("bdd")
     @Then("^Check all tours have right dates$")
     public void checkAllToursHaveRightDates(List<String> localDates) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -40,6 +44,7 @@ public class CheckResponseWithTourSteps {
         }
     }
 
+    @Tag("bdd")
     @Then("Check all tours have right cityOut")
     public void checkAllToursHaveRightCityOut(String cityFrom) {
         for (Tour tour : tours) {

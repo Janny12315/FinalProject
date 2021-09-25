@@ -39,7 +39,6 @@ public class UITest {
 
     @AfterEach
     public void closeWindow() {
-
         ArrayList<String> tabs = new ArrayList<String>(Selenide.webdriver().driver().getWebDriver().getWindowHandles());
         if (tabs.size() > 1) {
             Selenide.closeWindow();
@@ -67,6 +66,7 @@ public class UITest {
     @Order(2)
     @ParameterizedTest
     @CsvSource("jane-yaponia@mail.ru, 11111111")
+    @Tag("authorization")
     public void testAuthorization(String login, String password) {
         new MainPage().clickPersonalArea();
 
@@ -82,6 +82,7 @@ public class UITest {
     @Order(3)
     @ParameterizedTest
     @CsvSource("jane-yaponia@mail.ru, 11118111")
+    @Tag("authorization")
     public void testAuthorizationWithIncorrectDate(String login, String password) {
 
         new MainPage().clickPersonalArea();
@@ -103,13 +104,13 @@ public class UITest {
 
         List<String> list = Files.readAllLines(Paths.get(path));
 
-        MainPage mainPage = new MainPage();
+        ItemMenuPage itemMenuPage = new ItemMenuPage();
 
         for (int i = 0; i < list.size(); i++) {
             String itemName = list.get(i);
-            mainPage.itemMenu(itemName).click();
+            itemMenuPage.itemMenu(itemName).click();
             switchTo().window(1);
-            Assertions.assertTrue(new ItemMenuPage(itemName).IsCorrectItemMenuPage(itemName));
+            Assertions.assertTrue(itemMenuPage.IsCorrectItemMenuPage(itemName));
             Selenide.closeWindow();
             switchTo().window(0);
         }
@@ -139,12 +140,12 @@ public class UITest {
 
         switchTo().window(1);
 
-        ResultsPage resultSearchPage = new ResultsPage();
-        resultSearchPage.checkResultAvailable();
-        assertTrue(resultSearchPage.checkCountries(countryIn));
-        assertTrue(resultSearchPage.checkNight(night));
-        assertTrue(resultSearchPage.checkDate(dayBegin));
-//        assertTrue(resultSearchPage.checkCityOut(cityOut));
+        ResultsPage resultsPage = new ResultsPage();
+        resultsPage.checkResultAvailable();
+        assertTrue(resultsPage.checkCountries(countryIn));
+        assertTrue(resultsPage.checkNight(night));
+        assertTrue(resultsPage.checkDate(dayBegin));
+        assertTrue(resultsPage.checkCityOut(cityOut));
 
     }
 
@@ -164,10 +165,10 @@ public class UITest {
         intermediateSelection.changeTypeOfFood(pansion);
         Selenide.sleep(1000);
 
-        ResultsPage resultSearchPage = new ResultsPage();
-        assertTrue(resultSearchPage.checkCurrency(Currency.USD));
-        assertTrue(resultSearchPage.checkStars(stars));
-        assertTrue(resultSearchPage.checkPansion(pansion));
+        ResultsPage resultsPage = new ResultsPage();
+        assertTrue(resultsPage.checkCurrency(Currency.USD));
+        assertTrue(resultsPage.checkStars(stars));
+        assertTrue(resultsPage.checkPansion(pansion));
 
     }
 
@@ -187,10 +188,10 @@ public class UITest {
 
         switchTo().window(1);
 
-        ResultsPage resultSearchPage = new ResultsPage();
+        ResultsPage resultsPage = new ResultsPage();
 
-        resultSearchPage.checkResultAvailable();
-        List<String> infoTour = resultSearchPage.selectTour(selectResult);
+        resultsPage.checkResultAvailable();
+        List<String> infoTour = resultsPage.selectTour(selectResult);
 
         switchTo().window(2);
 
@@ -202,5 +203,4 @@ public class UITest {
             assertEquals(infoTour.get(i), resultTour.get(i));
         }
     }
-
 }
