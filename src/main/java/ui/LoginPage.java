@@ -18,6 +18,8 @@ public class LoginPage {
     }
 
     public LoginPage inputPass(String pass) {
+//        while (!passInput.isDisplayed())
+//            clickContinue();
         passInput.should(Condition.visible).setValue(pass);
         return this;
     }
@@ -28,7 +30,7 @@ public class LoginPage {
     }
 
     public LoginPage enter() {
-        enterButton.click();
+        enterButton.should(Condition.visible).click();
         return this;
     }
 

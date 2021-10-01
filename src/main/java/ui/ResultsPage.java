@@ -36,8 +36,6 @@ public class ResultsPage {
         LocalDate selectedDay = LocalDate.of(2021, 10, dayBegin-1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
         List<LocalDate> list = datesInResults.stream().map(se -> LocalDate.parse(se.getText().substring(0, 10), formatter)).collect(Collectors.toList());
-        System.out.println(selectedDay);
-        System.out.println(selectedDay);
         boolean isDateRight = false;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).isAfter(selectedDay))
@@ -52,8 +50,6 @@ public class ResultsPage {
 
     public boolean checkCityOut(String cityOut) {
         screenshot("my_file_name");
-        System.out.println(cityOutResult.getText().split(" ")[0]);
-        System.out.println(cityOut);
         return cityOutResult.getText().split(" ")[0].equals(cityOut);
     }
 

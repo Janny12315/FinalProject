@@ -14,6 +14,8 @@ public class TourSelector {
     private static final SelenideElement selectButtonDate = $("#dateRange-from");
     private static final SelenideElement searchButton = $x("//*[@type=\"button\"]");
     private static final SelenideElement backMonth = $x("//a[@class=\"ui-datepicker-prev ui-corner-all\"]");
+    private static final SelenideElement firstmonth = $x("(//*[@class=\"ui-datepicker-group ui-datepicker-group-first\"]//span)[2]");
+    private static final SelenideElement lastmonth = $x("(//*[@class=\"ui-datepicker-group ui-datepicker-group-last\"]//span)[2]");
 
     public TourSelector selectCityOut(String city) {
         Select select = new Select(selectButtonCityOut);
@@ -34,15 +36,22 @@ public class TourSelector {
         return this;
     }
 
-    public TourSelector selectDateBegin(int day) {
+    public TourSelector selectDateBegin(int day, String month) {
         selectButtonDate.should(Condition.visible).click();
-        String path = String.format("//a[text()=\"%d\"]", day);
-        if ($x(path).isDisplayed())
-            $x(path).click();
-        else {
+        while (!firstmonth.isDisplayed()){
             selectButtonDate.click();
-            $x(path).click();
         }
+
+        System.out.println("первый месяц "+firstmonth.getText());
+        System.out.println("второй месяц "+lastmonth.getText());
+        String path=null;
+        if(firstmonth.getText().equals(month)){
+            path=String.format("//*[@class=\"ui-datepicker-group ui-datepicker-group-first\"]//a[text()=%d]",day);
+        }
+        if(lastmonth.getText().equals(month)){
+            path=String.format("//*[@class=\"ui-datepicker-group ui-datepicker-group-last\"]//a[text()=%d]",day);
+        }
+        $x(path).click();
         return this;
     }
 

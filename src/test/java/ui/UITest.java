@@ -136,7 +136,7 @@ public class UITest {
 
         TourSelector tourSelector = new TourSelector();
 
-        tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectDateBegin(dayBegin).selectNight(night).clickSearchButton();
+        tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectDateBegin(dayBegin, "Октябрь").selectNight(night).clickSearchButton();
 
         switchTo().window(1);
 
@@ -152,7 +152,7 @@ public class UITest {
     @DisplayName("Уточнение параметров тура")
     @Order(7)
     @ParameterizedTest
-    @CsvSource("USD, 5, Только завтраки")
+    @CsvSource("EUR, 5, Только завтраки")
     @Tag("integration")
     public void testIntermediateSelection(String currency, int stars, String pansion) {
 
@@ -176,22 +176,22 @@ public class UITest {
     @DisplayName("Подбор и выбор одного тура")
     @Order(8)
     @ParameterizedTest
-    @CsvSource("Минск, Кипр, 11, 12, 1")
+    @CsvSource("Минск, Кипр, 11, 12")
     @Tag("End-to-End")
-    public void testTourBooking(String cityOut, String countryIn, int night, int dayBegin, int selectResult) {
+    public void testTourBooking(String cityOut, String countryIn, int night, int dayBegin) {
 
         new MainPage().setLocationMinsk();
 
         TourSelector tourSelector = new TourSelector();
 
-        tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectNight(night).selectDateBegin(dayBegin).clickSearchButton();
+        tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectNight(night).selectDateBegin(dayBegin, "Октябрь").clickSearchButton();
 
         switchTo().window(1);
 
         ResultsPage resultsPage = new ResultsPage();
 
         resultsPage.checkResultAvailable();
-        List<String> infoTour = resultsPage.selectTour(selectResult);
+        List<String> infoTour = resultsPage.selectTour(1);
 
         switchTo().window(2);
 
