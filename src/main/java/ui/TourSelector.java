@@ -41,9 +41,6 @@ public class TourSelector {
         while (!firstmonth.isDisplayed()){
             selectButtonDate.click();
         }
-
-        System.out.println("первый месяц "+firstmonth.getText());
-        System.out.println("второй месяц "+lastmonth.getText());
         String path=null;
         if(firstmonth.getText().equals(month)){
             path=String.format("//*[@class=\"ui-datepicker-group ui-datepicker-group-first\"]//a[text()=%d]",day);

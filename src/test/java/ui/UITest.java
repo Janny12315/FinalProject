@@ -50,11 +50,10 @@ public class UITest {
     @Order(1)
     @ParameterizedTest
     @CsvSource("src/test/resources/BannersNames")
-    @Tag("smoke")
+    @Tag("sanity")
     public void testBanner(String path) throws IOException {
 
         List<String> list = Files.readAllLines(Paths.get(path));
-
         Banner banner = new Banner(list);
 
         for (int i = 0; i < list.size(); i++) {
@@ -99,7 +98,7 @@ public class UITest {
     @Order(4)
     @ParameterizedTest
     @CsvSource("src/test/resources/ItemsMenu")
-    @Tag("smoke")
+    @Tag("sanity")
     public void testItemMenu(String path) throws IOException {
 
         List<String> list = Files.readAllLines(Paths.get(path));
@@ -120,7 +119,7 @@ public class UITest {
     @Order(5)
     @ParameterizedTest
     @CsvSource({"31"})
-    @Tag("smoke")
+    @Tag("sanity")
     public void testCountries(int count) {
         int countCountries = new MainPage().clickCountries().countCountries();
         assertEquals(count, countCountries);
@@ -129,8 +128,8 @@ public class UITest {
     @DisplayName("Подбор тура")
     @Order(6)
     @ParameterizedTest
-    @CsvSource({"Киев, ОАЭ, 05, 8",
-            "Москва, Греция, 10, 28"})
+    @CsvSource({"Киев, ОАЭ, 12, 10",
+            "Москва, Греция, 11, 15"})
     @Tag("integration")
     public void testTourSelection(String cityOut, String countryIn, int dayBegin, int night) {
 
@@ -141,6 +140,7 @@ public class UITest {
         switchTo().window(1);
 
         ResultsPage resultsPage = new ResultsPage();
+
         resultsPage.checkResultAvailable();
         assertTrue(resultsPage.checkCountries(countryIn));
         assertTrue(resultsPage.checkNight(night));
@@ -152,11 +152,15 @@ public class UITest {
     @DisplayName("Уточнение параметров тура")
     @Order(7)
     @ParameterizedTest
-    @CsvSource("EUR, 5, Только завтраки")
+    @CsvSource({"EUR, 5, Только завтраки",
+            "BYN, 3, Все включено"})
     @Tag("integration")
     public void testIntermediateSelection(String currency, int stars, String pansion) {
 
-        open("https://tourist.teztour.by/toursearch/8d51bf63c719684b7e11c4fa6cac2c84/tourType/1/cityId/786/before/19.10.2021/after/12.10.2021/countryId/7067673/minNights/11/maxNights/14/adults/2/flexdate/0/flexnight/0/hotelTypeId/357603/mealTypeId/2424/rAndBBetter/yes/isTableView/0/lview/cls/noTicketsTo/no/noTicketsFrom/no/hotelInStop/no/recommendedFlag/no/onlineConfirmFlag/no/tourMaxPrice/1500000/categoryGreatThan/yes/currencyId/533067/dtype/period/baggage/2.ru.html");
+        open("https://tourist.teztour.by/toursearch/8d51bf63c719684b7e11c4fa6cac2c84/tourType/1/cityId/786/" +
+                "before/19.10.2021/after/12.10.2021/countryId/7067673/minNights/11/maxNights/14/adults/2/flexdate/0/flexnight/0/" +
+                "hotelTypeId/357603/mealTypeId/2424/rAndBBetter/yes/isTableView/0/lview/cls/noTicketsTo/no/noTicketsFrom/no/hotelInStop/no/" +
+                "recommendedFlag/no/onlineConfirmFlag/no/tourMaxPrice/1500000/categoryGreatThan/yes/currencyId/533067/dtype/period/baggage/2.ru.html");
         new ResultsPage().checkResultAvailable();
         IntermediateSelection intermediateSelection = new IntermediateSelection();
 
@@ -191,6 +195,7 @@ public class UITest {
         ResultsPage resultsPage = new ResultsPage();
 
         resultsPage.checkResultAvailable();
+
         List<String> infoTour = resultsPage.selectTour(1);
 
         switchTo().window(2);
