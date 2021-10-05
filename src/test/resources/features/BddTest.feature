@@ -11,7 +11,7 @@ Feature: Check tour received from API
 
   Scenario: get right parameters for receiving tours from API
     When get catalog of parameters
-    Then Check status code 201
+    Then Check status code 200
 
   Scenario: get country guide
     When get country guide
