@@ -1,6 +1,6 @@
 package api.Steps;
 
-import api.HttpConnect;
+import api.pages.HttpConnect;
 import io.cucumber.java.en.*;
 import org.apache.http.HttpResponse;
 import org.junit.jupiter.api.Tag;
