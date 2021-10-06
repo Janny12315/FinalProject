@@ -50,14 +50,12 @@ public class UITest {
     @DisplayName("Проверка отображения баннеров")
     @Order(1)
     @ParameterizedTest
-    @CsvSource("src/test/resources/BannersNames")
+    @CsvSource("src/test/resources/datesForTests/BannersNames")
     @Tag("sanity")
     public void testBanner(String path) throws IOException {
 
         List<String> list = Files.readAllLines(Paths.get(path));
-        Banner banner = new Banner(list);
-
-        //banner.getBanners();
+        Banner banner = new Banner();
 
         for (int i = 0; i < list.size(); i++) {
             assertEquals(list.get(i).toUpperCase(), banner.switchBanner(i + 1));
@@ -100,7 +98,7 @@ public class UITest {
     @DisplayName("Проверка отображения информационного меню")
     @Order(4)
     @ParameterizedTest
-    @CsvSource("src/test/resources/ItemsMenu")
+    @CsvSource("src/test/resources/datesForTests/ItemsMenu")
     @Tag("sanity")
     public void testItemMenu(String path) throws IOException {
 
