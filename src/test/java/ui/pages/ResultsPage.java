@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -68,8 +67,7 @@ public class ResultsPage {
     }
 
     public boolean checkPansion(String pansion) {
-
-        logger.debug("Check pansion: " + pansion + " : " + starsInResults.stream().filter(SelenideElement::isDisplayed).map(s -> s.getAttribute("data-mealplan")).collect(Collectors.toList()));
+        logger.debug("Check pansion: " + pansion + " : " + pansionInResults.stream().filter(SelenideElement::isDisplayed).map(s -> s.getAttribute("data-mealplan")).collect(Collectors.toList()));
         return pansionInResults.stream().filter(SelenideElement::isDisplayed).map(s -> s.getAttribute("data-mealplan")).filter(Objects::nonNull).allMatch(s -> s.contains(pansion));
     }
 

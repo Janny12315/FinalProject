@@ -129,8 +129,8 @@ public class UITest {
     @DisplayName("Подбор тура")
     @Order(6)
     @ParameterizedTest
-    @CsvSource({"Киев, ОАЭ, 12, Октябрь, 10",
-            "Москва, Греция, 11, Октябрь, 15"})
+    @CsvSource({"Киев, ОАЭ, 20, Октябрь, 10",
+            "Москва, Греция, 20, Октябрь, 15"})
     @Tag("integration")
     public void testTourSelection(String cityOut, String countryIn, int dayBegin, String month, int night) {
 
@@ -153,12 +153,12 @@ public class UITest {
     @DisplayName("Уточнение параметров тура")
     @Order(7)
     @ParameterizedTest
-    @CsvSource({"EUR, 5, Только завтраки", "BYN, 3, Все включено"})
+    @CsvSource({"EUR, 5, Только завтраки",
+            "BYN, 3, Все включено"})
     @Tag("integration")
     public void testIntermediateSelection(String currency, int stars, String pansion) {
-
         open("https://tourist.teztour.by/toursearch/8d51bf63c719684b7e11c4fa6cac2c84/tourType/1/cityId/786/" +
-                "before/19.10.2021/after/12.10.2021/countryId/7067673/minNights/11/maxNights/14/adults/2/flexdate/0/flexnight/0/" +
+                "before/27.10.2021/after/20.10.2021/countryId/7067673/minNights/11/maxNights/14/adults/2/flexdate/0/flexnight/0/" +
                 "hotelTypeId/357603/mealTypeId/2424/rAndBBetter/yes/isTableView/0/lview/cls/noTicketsTo/no/noTicketsFrom/no/hotelInStop/no/" +
                 "recommendedFlag/no/onlineConfirmFlag/no/tourMaxPrice/1500000/categoryGreatThan/yes/currencyId/533067/dtype/period/baggage/2.ru.html");
         ResultsPage resultsPage = new ResultsPage();
@@ -181,9 +181,9 @@ public class UITest {
     @DisplayName("Подбор и выбор одного тура")
     @Order(8)
     @ParameterizedTest
-    @CsvSource("Минск, Кипр, 11, 12, Октябрь")
+    @CsvSource("Минск, Кипр, 25, Октябрь, 8")
     @Tag("End-to-End")
-    public void testTourBooking(String cityOut, String countryIn, int night, int dayBegin, String month) {
+    public void testTourBooking(String cityOut, String countryIn, int dayBegin, String month, int night) {
 
         new MainPage().setLocationMinsk();
 
