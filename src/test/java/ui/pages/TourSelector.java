@@ -27,7 +27,7 @@ public class TourSelector {
         Select select = new Select(selectButtonCityOut.should(Condition.visible));
         while (!select.getFirstSelectedOption().getText().equals(city)) {
             select.selectByVisibleText(city);
-            logger.debug("Select city: " + city + " : " + select.getOptions().stream().map(WebElement::getText).collect(Collectors.toList()));
+            //logger.debug("Select city: " + city + " : " + select.getOptions().stream().map(WebElement::getText).collect(Collectors.toList()));
         }
         return this;
     }
@@ -36,7 +36,7 @@ public class TourSelector {
         Select select = new Select(selectButtonCountryIn.should(Condition.visible));
         while (!select.getFirstSelectedOption().getText().equals(country)) {
             select.selectByVisibleText(country);
-            logger.debug("Select country: " + country + " : " + select.getOptions().stream().map(WebElement::getText).collect(Collectors.toList()));
+            //logger.debug("Select country: " + country + " : " + select.getOptions().stream().map(WebElement::getText).collect(Collectors.toList()));
         }
         return this;
     }
