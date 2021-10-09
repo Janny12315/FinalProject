@@ -1,8 +1,8 @@
-package api.Steps;
+package api.steps;
 
-import api.pages.HttpConnect;
-import api.pages.ParseJsonTour;
-import api.pages.Tour;
+import api.connect.HttpConnect;
+import api.connect.ParseJsonTour;
+import api.connect.Tour;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Tag;

@@ -24,13 +24,15 @@ public class ResultsPage {
     private static Logger logger = Logger.getLogger(Banner.class);
 
     public void checkResultAvailable() {
-        Configuration.timeout = 70000;
+        Configuration.timeout = 50000;
         $$x(countriesInResults).get(0).shouldBe(Condition.visible);
         Configuration.timeout = 4000;
     }
 
     public void checkIntermediateResultAvailable() {
-        $x("//*[@href=\"javascript:void(0);\"]").shouldBe(Condition.visible).click();
+        while (currencyInResults.size() < 3) {
+            $x("//*[@href=\"javascript:void(0);\"]").shouldBe(Condition.visible).click();
+        }
     }
 
     public boolean checkCountries(String country) {

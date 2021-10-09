@@ -1,7 +1,6 @@
-package api.pages;
+package api.connect;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Tour {
     private final String cityFrom;

@@ -1,4 +1,4 @@
-package api.pages;
+package api.connect;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

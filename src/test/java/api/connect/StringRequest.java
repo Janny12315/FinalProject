@@ -1,4 +1,4 @@
-package api.pages;
+package api.connect;
 
 public class StringRequest {
 

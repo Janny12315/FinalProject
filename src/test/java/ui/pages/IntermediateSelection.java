@@ -20,7 +20,14 @@ public class IntermediateSelection {
             selectPriceforCurrency.click();
         }
         selectCurrency.click();
-        $x(String.format("(//a[@%s])[3]", Currency.getCurrency(currency).getLink())).click();
+        String path= String.format("(//a[@%s])[3]", Currency.getCurrency(currency).getLink());
+        $x(path).click();
+
+        System.out.println("Выбранная валюта "+$x("//*[@class=\"styled_select\"]/a/span").getText());
+        while (!$x("//*[@class=\"styled_select\"]/a/span").getText().equals(currency)){
+            selectCurrency.click();
+            $x(path).click();
+        }
     }
 
     public void changeTypeOfFood(String typeOfFood) {

@@ -1,4 +1,4 @@
-package api.pages;
+package api.connect;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

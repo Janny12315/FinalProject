@@ -12,6 +12,7 @@ Feature: Check tour received from API
   Scenario: get right parameters for receiving tours from API
     When get catalog of parameters
     Then Check status code 200
+    Then Check response contains id Almaty 2707
 
   Scenario: get country guide
     When get country guide
