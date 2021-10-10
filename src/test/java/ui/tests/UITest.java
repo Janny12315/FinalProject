@@ -16,7 +16,6 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UITest {
 
     @BeforeAll
@@ -48,7 +47,6 @@ public class UITest {
     }
 
     @DisplayName("Проверка отображения баннеров")
-    @Order(1)
     @ParameterizedTest
     @CsvSource("src/test/resources/datesForTests/BannersNames")
     @Tag("sanity")
@@ -63,7 +61,6 @@ public class UITest {
     }
 
     @DisplayName("Авторизация. Вход в личный кабинет")
-    @Order(2)
     @ParameterizedTest
     @CsvSource("jane-yaponia@mail.ru, 11111111")
     @Tag("authorization")
@@ -79,7 +76,6 @@ public class UITest {
     }
 
     @DisplayName("Авторизация некорректными данными. Сообщение об ошибке")
-    @Order(3)
     @ParameterizedTest
     @CsvSource("jane-yaponia@mail.ru, 11118111")
     @Tag("authorization")
@@ -96,7 +92,6 @@ public class UITest {
     }
 
     @DisplayName("Проверка отображения информационного меню")
-    @Order(4)
     @ParameterizedTest
     @CsvSource("src/test/resources/datesForTests/ItemsMenu")
     @Tag("sanity")
@@ -116,7 +111,6 @@ public class UITest {
     }
 
     @DisplayName("Отображение списка стран")
-    @Order(5)
     @ParameterizedTest
     @CsvSource({"31"})
     @Tag("sanity")
@@ -126,7 +120,6 @@ public class UITest {
     }
 
     @DisplayName("Подбор тура")
-    @Order(6)
     @ParameterizedTest
     @CsvSource({"Киев, ОАЭ, 20, Октябрь, 10",
             "Москва, Греция, 20, Октябрь, 15"})
@@ -150,7 +143,6 @@ public class UITest {
     }
 
     @DisplayName("Уточнение параметров тура")
-    @Order(7)
     @ParameterizedTest
     @CsvSource({"EUR, 5, Только завтраки",
             "BYN, 3, Все включено"})
@@ -178,7 +170,6 @@ public class UITest {
 
 
     @DisplayName("Подбор и выбор одного тура")
-    @Order(8)
     @ParameterizedTest
     @CsvSource("Минск, Кипр, 25, Октябрь, 8")
     @Tag("End-to-End")
@@ -190,7 +181,11 @@ public class UITest {
 
         tourSelector.selectCityOut(cityOut).selectCountryIn(countryIn).selectNight(night).selectDateBegin(dayBegin, month).clickSearchButton();
 
-        switchTo().window(1);
+        Selenide.sleep(1000);
+
+        Selenide.closeWindow();
+
+        switchTo().window(0);
 
         ResultsPage resultsPage = new ResultsPage();
 
@@ -198,7 +193,7 @@ public class UITest {
 
         List<String> infoTour = resultsPage.selectTour(1);
 
-        switchTo().window(2);
+        switchTo().window(1);
 
         FinalTour finalTour = new FinalTour();
 

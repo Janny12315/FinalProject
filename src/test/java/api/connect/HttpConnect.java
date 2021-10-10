@@ -27,7 +27,6 @@ public class HttpConnect {
         HttpGet firstRequest = new HttpGet(stringRequestMyClass.getStringRequest());
         HttpResponse response = client.execute(firstRequest);
         String responseStr=EntityUtils.toString(response.getEntity());
-        System.out.println(response.getStatusLine().getStatusCode());
         return responseStr;
     }
 
