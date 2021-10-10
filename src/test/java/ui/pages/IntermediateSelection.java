@@ -14,27 +14,29 @@ public class IntermediateSelection {
     private static final SelenideElement selectStars = $x("(//*[@class=\"menu_title \"])[2]");
     private static final SelenideElement selectPriceForCurrency = $x("//div[contains(text(),\"Цена\")]");
 
+    public IntermediateSelection() {
+        Configuration.timeout = 20000;
+    }
+
     public void changeCurrency(String currency) {
-        Configuration.timeout = 10000;
         Selenide.sleep(2000);
         while (!selectCurrency.isDisplayed()) {
-            System.out.println(selectPriceForCurrency.getText());
-            selectPriceForCurrency.click();
+            selectPriceForCurrency.shouldBe(Condition.visible).click();
         }
         selectCurrency.click();
         String path = String.format("(//a[@%s])[3]", Currency.getCurrency(currency).getLink());
+        System.out.println(Currency.getCurrency(currency).getLink());
+        System.out.println(path);
         $x(path).click();
         while (!$x("//*[@class=\"styled_select\"]/a/span").getText().equals(currency)) {
             selectPriceForCurrency.click();
             selectCurrency.click();
             $x(path).click();
         }
-        Configuration.timeout = 4000;
 
     }
 
     public void changeTypeOfFood(String typeOfFood) {
-        Configuration.timeout = 20000;
         if (selectTypeOfFood.isDisplayed()) {
             selectTypeOfFood.click();
         }
@@ -65,11 +67,9 @@ public class IntermediateSelection {
                         "change to one of them: Любое, Размещение без питания, Только завтраки, Завтрак и ужин, Завтрак, обед и ужин, Все включено, Ультра все включено");
                 break;
         }
-        Configuration.timeout = 4000;
     }
 
     public void changeStar(int star) {
-        Configuration.timeout = 20000;
         if (selectStars.isDisplayed()) {
             selectStars.click();
         }
@@ -90,7 +90,6 @@ public class IntermediateSelection {
                 System.out.println("There are no such stars level");
                 break;
         }
-        Configuration.timeout = 4000;
     }
 }
 

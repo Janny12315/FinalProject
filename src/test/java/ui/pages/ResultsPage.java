@@ -30,11 +30,9 @@ public class ResultsPage {
     }
 
     public void checkIntermediateResultAvailable() {
-        Configuration.timeout = 20000;
         while (currencyInResults.size() < 3) {
             $x("//*[@href=\"javascript:void(0);\"]").shouldBe(Condition.visible).click();
         }
-        Configuration.timeout = 4000;
     }
 
     public boolean checkCountries(String country) {
