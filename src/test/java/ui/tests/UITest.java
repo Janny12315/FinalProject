@@ -40,7 +40,7 @@ public class UITest {
 
     @AfterEach
     public void closeWindow() {
-        ArrayList<String> tabs = new ArrayList<String>(Selenide.webdriver().driver().getWebDriver().getWindowHandles());
+        ArrayList<String> tabs = new ArrayList<>(Selenide.webdriver().driver().getWebDriver().getWindowHandles());
         if (tabs.size() > 1) {
             Selenide.closeWindow();
             switchTo().window(0);
@@ -106,8 +106,7 @@ public class UITest {
 
         ItemMenuPage itemMenuPage = new ItemMenuPage();
 
-        for (int i = 0; i < list.size(); i++) {
-            String itemName = list.get(i);
+        for (String itemName : list) {
             itemMenuPage.itemMenu(itemName).click();
             switchTo().window(1);
             Assertions.assertTrue(itemMenuPage.IsCorrectItemMenuPage(itemName));
