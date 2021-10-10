@@ -28,11 +28,11 @@ public class IntermediateSelection {
         System.out.println(Currency.getCurrency(currency).getLink());
         System.out.println(path);
         $x(path).click();
-        while (!$x("//*[@class=\"styled_select\"]/a/span").getText().equals(currency)) {
-            selectPriceForCurrency.click();
-            selectCurrency.click();
-            $x(path).click();
-        }
+//        while (!$x("//*[@class=\"styled_select\"]/a/span").getText().equals(currency)) {
+//            selectPriceForCurrency.click();
+//            selectCurrency.click();
+//            $x(path).click();
+//        }
 
     }
 
