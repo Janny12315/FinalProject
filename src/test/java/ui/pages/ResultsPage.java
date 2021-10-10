@@ -24,7 +24,7 @@ public class ResultsPage {
     private static Logger logger = Logger.getLogger(Banner.class);
 
     public void checkResultAvailable() {
-        Configuration.timeout = 50000;
+        Configuration.timeout = 40000;
         $$x(countriesInResults).get(0).shouldBe(Condition.visible);
         Configuration.timeout = 4000;
     }

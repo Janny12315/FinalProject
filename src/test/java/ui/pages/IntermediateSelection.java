@@ -12,19 +12,17 @@ public class IntermediateSelection {
     private static final SelenideElement selectCurrency = $x("//*[@class=\"styled_select\"]/a");
     private static final SelenideElement selectTypeOfFood = $x("//div[contains(text(),\"Питание\")]");
     private static final SelenideElement selectStars = $x("(//*[@class=\"menu_title \"])[2]");
-    private static final SelenideElement selectPriceforCurrency = $x("//*[@class=\"menu_title\"]");
+    private static final SelenideElement selectPriceForCurrency = $x("//div[contains(text(),\"Цена\")]");
 
     public void changeCurrency(String currency) {
         Selenide.sleep(2000);
-        if (selectPriceforCurrency.isDisplayed()) {
-            selectPriceforCurrency.click();
+        while (!selectCurrency.isDisplayed()){
+            selectPriceForCurrency.click();
         }
         selectCurrency.click();
-        String path= String.format("(//a[@%s])[3]", Currency.getCurrency(currency).getLink());
+        String path = String.format("(//a[@%s])[3]", Currency.getCurrency(currency).getLink());
         $x(path).click();
-
-//        System.out.println("Выбранная валюта "+$x("//*[@class=\"styled_select\"]/a/span").getText());
-        while (!$x("//*[@class=\"styled_select\"]/a/span").getText().equals(currency)){
+        while (!$x("//*[@class=\"styled_select\"]/a/span").getText().equals(currency)) {
             selectCurrency.click();
             $x(path).click();
         }
@@ -65,7 +63,7 @@ public class IntermediateSelection {
     }
 
     public IntermediateSelection() {
-        Configuration.timeout = 40000;
+        Configuration.timeout = 20000;
     }
 
     public void changeStar(int star) {
