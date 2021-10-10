@@ -16,19 +16,22 @@ public class IntermediateSelection {
 
     public void changeCurrency(String currency) {
         Selenide.sleep(2000);
-        while (!selectCurrency.isDisplayed()){
+        while (!selectCurrency.isDisplayed()) {
+            System.out.println(selectPriceForCurrency.getText());
             selectPriceForCurrency.click();
         }
         selectCurrency.click();
         String path = String.format("(//a[@%s])[3]", Currency.getCurrency(currency).getLink());
         $x(path).click();
         while (!$x("//*[@class=\"styled_select\"]/a/span").getText().equals(currency)) {
+            selectPriceForCurrency.click();
             selectCurrency.click();
             $x(path).click();
         }
     }
 
     public void changeTypeOfFood(String typeOfFood) {
+        Configuration.timeout = 20000;
         if (selectTypeOfFood.isDisplayed()) {
             selectTypeOfFood.click();
         }
@@ -59,14 +62,11 @@ public class IntermediateSelection {
                         "change to one of them: Любое, Размещение без питания, Только завтраки, Завтрак и ужин, Завтрак, обед и ужин, Все включено, Ультра все включено");
                 break;
         }
-
-    }
-
-    public IntermediateSelection() {
-        Configuration.timeout = 20000;
+        Configuration.timeout = 4000;
     }
 
     public void changeStar(int star) {
+        Configuration.timeout = 20000;
         if (selectStars.isDisplayed()) {
             selectStars.click();
         }
@@ -87,7 +87,7 @@ public class IntermediateSelection {
                 System.out.println("There are no such stars level");
                 break;
         }
-
+        Configuration.timeout = 4000;
     }
 }
 
