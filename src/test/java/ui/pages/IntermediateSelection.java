@@ -25,8 +25,6 @@ public class IntermediateSelection {
         }
         selectCurrency.click();
         String path = String.format("(//a[@%s])[3]", Currency.getCurrency(currency).getLink());
-        System.out.println(Currency.getCurrency(currency).getLink());
-        System.out.println(path);
         $x(path).click();
 //        while (!$x("//*[@class=\"styled_select\"]/a/span").getText().equals(currency)) {
 //            selectPriceForCurrency.click();
