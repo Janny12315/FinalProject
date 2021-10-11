@@ -46,5 +46,10 @@ public class CheckGeneralReferenceSteps {
         long id= (long) object.get("cityId");
         assertEquals(id, idAlmaty);
     }
+
+    @Then("Check new")
+    public void checkNew() {
+        HttpConnect.tokenRestAssuredTest();
+    }
 }
 

@@ -32,7 +32,7 @@ public class Banner {
                 $x("//*[@href=\"12789\"]").click();
                 return banner3.should(Condition.visible).getText();
             case 4:
-                $x("//*[@href=\"10773\"]").click();
+                $x("//*[@href=\"13412\"]").click();
                 return banner4.should(Condition.visible).getText();
             case 5:
                 $x("//*[@href=\"13317\"]").click();
