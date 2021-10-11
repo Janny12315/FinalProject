@@ -16,5 +16,4 @@ Feature: Check tour received from API
 
   Scenario: get country guide
     When get country guide
-    Then Check status code 201
-    Then Check new
+    Then Check status code with RestAssured 201

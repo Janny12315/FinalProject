@@ -3,6 +3,7 @@ D:\JavaProjects\FinalProject\src\test\java\ui\pages\ItemMenuPage.java
 D:\JavaProjects\FinalProject\src\test\java\ui\pages\TourSelector.java
 D:\JavaProjects\FinalProject\src\test\java\ui\pages\CabinetPage.java
 D:\JavaProjects\FinalProject\src\test\java\api\connect\ParseJsonTour.java
+D:\JavaProjects\FinalProject\src\test\java\api\connect\RestAssuredConnect.java
 D:\JavaProjects\FinalProject\src\test\java\ui\pages\MainPage.java
 D:\JavaProjects\FinalProject\src\test\java\api\steps\CheckResponseWithTourSteps.java
 D:\JavaProjects\FinalProject\src\test\java\ui\tests\UITest.java

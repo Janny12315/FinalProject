@@ -15,7 +15,7 @@ public class IntermediateSelection {
     private static final SelenideElement selectPriceForCurrency = $x("//div[contains(text(),\"Цена\")]");
 
     public IntermediateSelection() {
-        Configuration.timeout = 20000;
+        Configuration.timeout = 40000;
     }
 
     public void changeCurrency(String currency) {
@@ -26,12 +26,6 @@ public class IntermediateSelection {
         selectCurrency.click();
         String path = String.format("(//a[@%s])[3]", Currency.getCurrency(currency).getLink());
         $x(path).click();
-//        while (!$x("//*[@class=\"styled_select\"]/a/span").getText().equals(currency)) {
-//            selectPriceForCurrency.click();
-//            selectCurrency.click();
-//            $x(path).click();
-//        }
-
     }
 
     public void changeTypeOfFood(String typeOfFood) {

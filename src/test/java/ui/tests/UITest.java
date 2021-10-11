@@ -16,6 +16,7 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UITest {
 
     @BeforeAll
@@ -46,6 +47,7 @@ public class UITest {
         }
     }
 
+    @Order(1)
     @DisplayName("Проверка отображения баннеров")
     @ParameterizedTest
     @CsvSource("src/test/resources/datesForTests/BannersNames")
@@ -60,6 +62,7 @@ public class UITest {
         }
     }
 
+    @Order(2)
     @DisplayName("Авторизация. Вход в личный кабинет")
     @ParameterizedTest
     @CsvSource("jane-yaponia@mail.ru, 11111111")
@@ -75,6 +78,7 @@ public class UITest {
 
     }
 
+    @Order(3)
     @DisplayName("Авторизация некорректными данными. Сообщение об ошибке")
     @ParameterizedTest
     @CsvSource("jane-yaponia@mail.ru, 11118111")
@@ -91,6 +95,7 @@ public class UITest {
 
     }
 
+    @Order(4)
     @DisplayName("Проверка отображения информационного меню")
     @ParameterizedTest
     @CsvSource("src/test/resources/datesForTests/ItemsMenu")
@@ -110,6 +115,7 @@ public class UITest {
         }
     }
 
+    @Order(5)
     @DisplayName("Отображение списка стран")
     @ParameterizedTest
     @CsvSource({"31"})
@@ -119,6 +125,7 @@ public class UITest {
         assertEquals(count, countCountries);
     }
 
+    @Order(6)
     @DisplayName("Подбор тура")
     @ParameterizedTest
     @CsvSource({"Киев, ОАЭ, 20, Октябрь, 10",
@@ -142,6 +149,7 @@ public class UITest {
 
     }
 
+    @Order(7)
     @DisplayName("Уточнение параметров тура")
     @ParameterizedTest
     @CsvSource({"EUR, 5, Только завтраки",
@@ -165,10 +173,9 @@ public class UITest {
         assertTrue(resultsPage.checkCurrency(currency));
         assertTrue(resultsPage.checkStars(stars));
         assertTrue(resultsPage.checkPansion(pansion));
-
     }
 
-
+    @Order(8)
     @DisplayName("Подбор и выбор одного тура")
     @ParameterizedTest
     @CsvSource("Минск, Кипр, 25, Октябрь, 8")

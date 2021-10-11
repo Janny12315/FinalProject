@@ -68,21 +68,3 @@ public class StringRequest {
     }
 
 }
-
-
-//    private String req = "https://search.tez-tour.com/tariffsearch/getResult?" +
-//            "priceMin=0&" +
-//            "priceMax=700&" +
-//            "nightsMin=6&" +
-//            "nightsMax=6&" +
-//            "hotelClassId=269506&" +
-//            "accommodationId=2&" +
-//            "rAndBId=2424&" +
-//            "cityId=345&" +
-//            "countryId=1104&" +
-//            "after=20.10.2021&" +
-//            "before=30.10.2021&" +
-//            "hotelClassBetter=true&" +
-//            "rAndBBetter=true&" +
-//            "hotelInStop=false";
-//
