@@ -26,10 +26,10 @@ public class Banner {
                 $x("//*[@href=\"10529\"]").click();
                 return banner1.should(Condition.visible).getText();
             case 2:
-                $x("//*[@href=\"12752\"]").click();
+                $x("//*[@href=\"12789\"]").click();
                 return banner2.should(Condition.visible).getText();
             case 3:
-                $x("//*[@href=\"12789\"]").click();
+                $x("//*[@href=\"12752\"]").click();
                 return banner3.should(Condition.visible).getText();
             case 4:
                 $x("//*[@href=\"13412\"]").click();

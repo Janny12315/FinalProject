@@ -6,8 +6,8 @@ Feature: Check tour received from API
     Then Check all tours have right cityOut
       | Москва |
     Then Check all tours have right dates
-      | 2021-10-19 |
-      | 2021-10-31 |
+      | 2021-11-04 |
+      | 2021-11-16 |
 
   Scenario: get right parameters for receiving tours from API
     When get catalog of parameters

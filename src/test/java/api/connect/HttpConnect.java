@@ -22,8 +22,8 @@ public class HttpConnect {
                 .withRAndBId(2424)
                 .withCityId(345)
                 .withCountryId(1104)
-                .withDayAfter("20.10.2021")
-                .withSDayBefore("30.10.2021");
+                .withDayAfter("05.11.2021")
+                .withSDayBefore("15.11.2021");
         HttpGet firstRequest = new HttpGet(stringRequestMyClass.getStringRequest());
         HttpResponse response = client.execute(firstRequest);
         return EntityUtils.toString(response.getEntity());

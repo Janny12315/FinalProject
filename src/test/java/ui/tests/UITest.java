@@ -128,8 +128,8 @@ public class UITest {
     @Order(6)
     @DisplayName("Подбор тура")
     @ParameterizedTest
-    @CsvSource({"Киев, ОАЭ, 20, Октябрь, 10",
-            "Москва, Греция, 20, Октябрь, 15"})
+    @CsvSource({"Киев, ОАЭ, 5, Ноябрь, 15",
+            "Москва, Греция, 10, Ноябрь, 10"})
     @Tag("integration")
     public void testTourSelection(String cityOut, String countryIn, int dayBegin, String month, int night) {
 
@@ -144,7 +144,7 @@ public class UITest {
         resultsPage.checkResultAvailable();
         assertTrue(resultsPage.checkCountries(countryIn));
         assertTrue(resultsPage.checkNight(night));
-        assertTrue(resultsPage.checkDate(dayBegin));
+        assertTrue(resultsPage.checkDate(dayBegin, month));
         assertTrue(resultsPage.checkCityOut(cityOut));
 
     }
@@ -156,10 +156,11 @@ public class UITest {
             "BYN, 3, Все включено"})
     @Tag("integration")
     public void testIntermediateSelection(String currency, int stars, String pansion) {
-        open("https://tourist.teztour.by/toursearch/8d51bf63c719684b7e11c4fa6cac2c84/tourType/1/cityId/786/" +
-                "before/27.10.2021/after/20.10.2021/countryId/7067673/minNights/11/maxNights/14/adults/2/flexdate/0/flexnight/0/" +
-                "hotelTypeId/357603/mealTypeId/2424/rAndBBetter/yes/isTableView/0/lview/cls/noTicketsTo/no/noTicketsFrom/no/hotelInStop/no/" +
-                "recommendedFlag/no/onlineConfirmFlag/no/tourMaxPrice/1500000/categoryGreatThan/yes/currencyId/533067/dtype/period/baggage/2.ru.html");
+        open("https://tourist.teztour.by/toursearch/64cc1975b570e4c9657e7304947222a1/tourType/1/" +
+                "cityId/786/before/27.10.2021/after/21.10.2021/countryId/7067673/minNights/10/maxNights/14/adults/2/" +
+                "flexdate/0/flexnight/0/hotelTypeId/357603/mealTypeId/2424/rAndBBetter/yes/isTableView/0/lview/cls/" +
+                "noTicketsTo/no/noTicketsFrom/no/hotelInStop/no/recommendedFlag/no/onlineConfirmFlag/no/tourMaxPrice/1500000/" +
+                "categoryGreatThan/yes/currencyId/533067/dtype/period/baggage/2.ru.html");
         ResultsPage resultsPage = new ResultsPage();
         resultsPage.checkResultAvailable();
         IntermediateSelection intermediateSelection = new IntermediateSelection();
@@ -178,7 +179,7 @@ public class UITest {
     @Order(8)
     @DisplayName("Подбор и выбор одного тура")
     @ParameterizedTest
-    @CsvSource("Минск, Кипр, 25, Октябрь, 8")
+    @CsvSource("Минск, Кипр, 15, Ноябрь, 8")
     @Tag("End-to-End")
     public void testTourBooking(String cityOut, String countryIn, int dayBegin, String month, int night) {
 

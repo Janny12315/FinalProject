@@ -2,8 +2,10 @@ package ui.pages;
 
 import com.codeborne.selenide.*;
 import org.apache.log4j.Logger;
+import ui.RussianMonth;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +47,9 @@ public class ResultsPage {
         return nightsInResults.stream().map(se -> Integer.parseInt(se.getText().split(" ")[1])).allMatch(n -> n >= night && n < (night + 4));
     }
 
-    public boolean checkDate(int dayBegin) {
-        LocalDate selectedDay = LocalDate.of(2021, 10, dayBegin);
+    public boolean checkDate(int dayBegin, String month) {
+        int monthInt=Month.valueOf(RussianMonth.getMonth(month).toUpperCase()).getValue();
+        LocalDate selectedDay = LocalDate.of(2021, monthInt, dayBegin);
         LocalDate selectedDayAndWeek = selectedDay.plusDays(8);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
         logger.debug("Check dayBegin: " + dayBegin + " : " + datesInResults.stream().map(se -> LocalDate.parse(se.getText().substring(0, 10), formatter)).collect(Collectors.toList()));
